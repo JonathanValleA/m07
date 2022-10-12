@@ -1,5 +1,5 @@
 <?php 
-// Conexion a mi Base de datos
+// Conexion a mi Base de datos MySQL
         $db_host = "localhost";
         $db_nombre = "products";
         $db_usuario = "root";

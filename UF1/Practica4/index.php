@@ -1,4 +1,4 @@
-<?php include 'conection.php'?>
+<?php include 'conection.php'?> <!-- LLamar a un archivo externo (conection.php) -->
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
