@@ -1,4 +1,7 @@
-<?php include 'conection.php'?> <!-- LLamar a un archivo externo (conection.php) -->
+<?php 
+    include 'conection.php';
+    $sql = "SELECT * FROM PRODUCTO";
+?>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -19,13 +22,19 @@
     </thead>
     <tbody>
         <!-- Ir añadiendo los productos en la tabla -->
-        <?php foreach ($products as $i => $product){ ?>
-            <tr>
-                <th scope="row"><?php echo $i +1 ?></td>
-                <td><?php echo $product['Name'] ?></td>
-                <td><?php echo $product['Descripcion'] ?></td>
-                <td><?php echo $product['Price'] ?></td>
-                <td><button type="button" class="btn btn-outline-primary">Edit</button></td>
-                <td><button type="button" class="btn btn-outline-danger">Delete</button></td>
-        <?php }?>
+        <?php $resultado = mysqli_query($conexion, $sql);
+        $contador = 1;
+            while($product=mysqli_fetch_assoc($resultado)) { ?>
+
+                <tr>
+                    <td><?php echo $contador++?></td>
+                    <td><?php echo $product['Name']; ?></td>
+                    <td><?php echo $product['Descripcion']; ?></td>
+                    <td><?php echo $product['Price']; ?></td>
+                    <td><a class="btn btn-outline-primary" href="actualizar.php?id=<?php echo $product['id']; ?>">Edit</a></td>
+                    <td><a class="btn btn-outline-danger" href="eliminar.php?id=<?php echo $product['id']; ?>">Delete</a></td>
+                </tr>
+         <?php } mysqli_free_result($resultado); ?>
+         <div><a class="btn btn-success" href="añadir.php">Añadir</a></div>
+</table>
 </body>
