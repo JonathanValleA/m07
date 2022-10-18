@@ -1,3 +1,4 @@
+
 <?php
     try{
             $connect_PDO = new PDO ("mysql:host=localhost; dbname=products", "root", "");
@@ -14,6 +15,12 @@ $consulta = "SELECT * FROM PRODUCTO";
 $products = exec($consulta);
 ?>
 <html>
+
+<?php 
+    include 'conection.php';
+    $sql = "SELECT * FROM PRODUCTO";
+?>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +40,7 @@ $products = exec($consulta);
         </tr>
     </thead>
     <tbody>
+
 	
       <?php foreach ($products as $i => $product){ ?>
         <tr>
@@ -74,4 +82,23 @@ $products = exec($consulta);
 	</div>
 </body>
 </html>
+
+
+        <!-- Ir añadiendo los productos en la tabla -->
+        <?php $resultado = mysqli_query($conexion, $sql);
+        $contador = 1;
+            while($product=mysqli_fetch_assoc($resultado)) { ?>
+
+                <tr>
+                    <td><?php echo $contador++?></td>
+                    <td><?php echo $product['Name']; ?></td>
+                    <td><?php echo $product['Descripcion']; ?></td>
+                    <td><?php echo $product['Price']; ?></td>
+                    <td><a class="btn btn-outline-primary" href="actualizar.php?id=<?php echo $product['id']; ?>">Edit</a></td>
+                    <td><a class="btn btn-outline-danger" href="eliminar.php?id=<?php echo $product['id']; ?>">Delete</a></td>
+                </tr>
+         <?php } mysqli_free_result($resultado); ?>
+         <div><a class="btn btn-success" href="añadir.php">Añadir</a></div>
+</table>
+</body>
 
